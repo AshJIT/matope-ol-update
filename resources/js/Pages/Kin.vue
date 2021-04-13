@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto rounded-md border border-gray-300 py-5 px-10 my-10">
         <h1 class="text-2xl font-bold">{{ kin.name }}</h1>
-        <div class="flex w-1/2">
+        <div class="flex lg:w-1/2 flex-col lg:flex-row">
             <div class="flex-1">
                 <img :src="kin.current_image_url" alt="kin image">
             </div>
