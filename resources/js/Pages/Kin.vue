@@ -25,7 +25,6 @@
             kin: Object
         },
         mounted() {
-            console.log(this.kin);
         }
     }
 </script>

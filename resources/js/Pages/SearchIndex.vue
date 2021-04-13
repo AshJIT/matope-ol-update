@@ -42,11 +42,10 @@ export default {
         }
     },
     mounted() {
-        console.log(this.kin);
+
     },
     methods: {
         search: function(searchString) {
-            console.log(searchString);
             this.$inertia.reload({
                 data: {
                     page: 1,
