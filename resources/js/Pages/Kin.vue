@@ -1,4 +1,5 @@
 <template>
+    <navbar></navbar>
     <div class="container mx-auto rounded-md border border-gray-300 py-5 px-10 my-10">
         <h1 class="text-2xl font-bold">{{ kin.name }}</h1>
         <div class="flex lg:w-1/2 flex-col lg:flex-row">
@@ -16,7 +17,7 @@
                 </ul>
             </div>
         </div>
-        <div class="border-t border-gray-300 mt-5" v-if="children">
+        <div class="border-t border-gray-300 mt-5" v-if="kin.children_count">
             <div class="flex justify-between my-5">
                 <h1 class="text-xl font-bold">Children</h1>
                 <div class="">
@@ -27,9 +28,9 @@
 
             <div class="border-b border-gray-300" v-for="(breeding, index) in groupBy(children, 'birthdate')" :key="index" v-show="showOffspring">
                 <p class="my-2">
-                    <inertia-link class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/' + breeding[0].mother.slug">{{ breeding[0].mother.name }}</inertia-link> 
+                    <inertia-link v-if="breeding[0].mother" class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/' + breeding[0].mother.slug">{{ breeding[0].mother.name }}</inertia-link> <span v-else>???</span>
                     <span> x </span>
-                    <inertia-link class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/' + breeding[0].father.slug">{{ breeding[0].father.name }}</inertia-link>
+                    <inertia-link v-if="breeding[0].father" class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/' + breeding[0].father.slug">{{ breeding[0].father.name }}</inertia-link> <span v-else>???</span>
                 </p>
 
                 <div class="flex flex-wrap">
@@ -46,18 +47,21 @@
 </template>
 
 <script>
+    import Navbar from "@/Components/Nav";
+
     export default {
         props: {
             kin: Object,
             children: Object
         },
+        components: { Navbar },
         data: function() {
             return {
                 showOffspring: true,
             }
         },
         mounted() {
-            console.log(this.children);
+            console.log(this.kin, this.children);
         },
         methods: {
             groupBy: function(items, key) {

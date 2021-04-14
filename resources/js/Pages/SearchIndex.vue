@@ -1,4 +1,5 @@
 <template>
+    <navbar></navbar>
     <div class="container mx-auto rounded-md border border-gray-300 py-5 px-10 my-10">
         <h1 class="text-2xl font-bold">Matope Index Listing</h1>
         <div class="">
@@ -30,12 +31,13 @@
 </template>
 
 <script>
+import Navbar from "@/Components/Nav";
 import Pagination from "@/Components/Pagination";
 import Search from "@/Components/Search";
 
 export default {
     props: ['kin'],
-    components: { Pagination, Search },
+    components: { Navbar, Pagination, Search },
     data: function() {
         return {
             showImages: true,
