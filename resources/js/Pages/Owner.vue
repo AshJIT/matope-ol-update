@@ -1,4 +1,5 @@
 <template>
+    <navbar></navbar>
     <div class="container mx-auto rounded-md border border-gray-300 py-5 px-10 my-10">
         <h1 class="text-2xl font-bold">{{ owner.name + "'s Kin" }}</h1>
         <div class="">
@@ -29,7 +30,8 @@
 </template>
 
 <script>
-    import Pagination from '@/Components/Pagination';
+    import Pagination from "@/Components/Pagination";
+    import Navbar from "@/Components/Nav";
 
     export default {
         props: {
@@ -37,7 +39,8 @@
             owner: Object
         },
         components: {
-            Pagination
+            Pagination,
+            Navbar
         },
         data: function() {
             return {
