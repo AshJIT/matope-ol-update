@@ -43,6 +43,10 @@ class Kin extends Model
         return $this->belongsTo(Gender::class, 'gender_id');
     }
 
+    public function species() {
+        return $this->belongsTo(KinSpecies::class, 'species_id');
+    }
+
     public function mother() {
         return $this->belongsTo(Kin::class, 'mother_id');
     }

@@ -22,3 +22,16 @@ Route::get('/', 'App\Http\Controllers\SearchController@index');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+    Route::get('/dashboard', function() {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::get('admin/kin/create', 'App\Http\Controllers\KinController@create')->name('admin.kin.create');
+
+    Route::get('admin/kin/list', 'App\Http\Controllers\KinController@list')->name('admin.kin.list');
+    Route::post('admin/kin/store', 'App\Http\Controllers\KinController@store')->name('admin.kin.store');
+});
+    
+

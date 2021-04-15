@@ -16,6 +16,10 @@ mix.js('resources/js/app.js', 'public/js').vue()
         require('postcss-import'),
         require('tailwindcss'),
     ])
+    .styles(['./node_modules/primevue/resources/themes/saga-blue/theme.css',
+        './node_modules/primevue/resources/primevue.min.css',
+     './node_modules/primeicons/primeicons.css'], 'public/css/dist.css')
+    .copyDirectory('./node_modules/primeicons/fonts', 'public/css/fonts')
     .webpackConfig(require('./webpack.config'));
 
 if (mix.inProduction()) {
