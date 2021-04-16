@@ -19,8 +19,8 @@ class StoreKin extends FormRequest
             'name' => ['required', 'unique:kin,name', 'max:255'],
             'slug' => ['required', 'unique:kin,slug', 'max:255'],
             'current_image_url' => ['required'],
-            'mother_id' => ['numeric'],
-            'father_id' => ['numeric'],
+            'mother_id' => ['nullable', 'exists:kin,id'],
+            'father_id' => ['nullable', 'exists:kin,id'],
             'species_id' => ['required', 'numeric'],
             'owner_id' => ['required', 'numeric'],
             'colourist_id' => ['required', 'numeric'],
@@ -37,6 +37,7 @@ class StoreKin extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
+            'name' => trim($this->name),
             'slug' => Str::slug($this->name, '-'),
             'mother_id' => $this->mother ? $this->mother['id'] : null,
             'father_id' => $this->father ? $this->father['id'] : null,
