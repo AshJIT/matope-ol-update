@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Http\Requests\StoreKin;
 use App\Models\Kin;
@@ -45,8 +46,10 @@ class KinController extends Controller
 
     public function store(StoreKin $request) {
 
+        // dd($request->validated());
+
         Kin::create($request->validated());
 
-        return redirect('admin.kin.create')->with('flash.banner', 'Kin created successfully!');
+        return Redirect::route('admin.kin.create')->with('flash.banner', 'Kin created successfully!');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class StoreKin extends FormRequest
 {
@@ -23,7 +24,7 @@ class StoreKin extends FormRequest
             'species_id' => ['required', 'numeric'],
             'owner_id' => ['required', 'numeric'],
             'colourist_id' => ['required', 'numeric'],
-            'birthdate' => ['required'],
+            'birthdate' => ['required', 'date'],
             'gender_id' => ['required', 'numeric']
         ];
     }
@@ -39,6 +40,7 @@ class StoreKin extends FormRequest
             'slug' => Str::slug($this->name, '-'),
             'mother_id' => $this->mother ? $this->mother['id'] : null,
             'father_id' => $this->father ? $this->father['id'] : null,
+            'birthdate' => Carbon::parse($this->birthdate)->format('Y-m-d'),
             'species_id' => $this->species['id'],
             'owner_id' => $this->owner['id'],
             'colourist_id' => $this->colorist['id'],
