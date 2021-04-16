@@ -19,7 +19,7 @@ class SearchController extends Controller
         ->paginate(15)
         ->withQueryString();
 
-        return inertia('SearchIndex', [
+        return inertia('Index', [
             'kin' => $kin,
         ]);
     }

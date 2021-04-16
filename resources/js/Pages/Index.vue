@@ -4,7 +4,6 @@
         <h1 class="text-2xl font-bold">Matope Index Listing</h1>
         <div class="">
             <pagination :data="kin"></pagination>
-            <search @input="search"></search>
         </div>
         <div class="flex justify-end items-center">
             <input type="checkbox" id="show-images" name="show-images" v-model="showImages">
@@ -41,21 +40,6 @@ export default {
     data: function() {
         return {
             showImages: true,
-        }
-    },
-    mounted() {
-
-    },
-    methods: {
-        search: function(searchString) {
-            this.$inertia.reload({
-                data: {
-                    page: 1,
-                    filter: searchString
-                        ? { 'name': searchString }
-                        : null
-                }
-            });
         }
     }
 }
