@@ -5,7 +5,7 @@
                 <icon type="search"></icon>
             </button>
         </span>
-        <input type="search" class="w-full py-2 text-sm rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-500 border-gray-300" placeholder="Search..." autocomplete="off" v-model="searchTerm" @input="debounceInput">
+        <input type="search" class="w-full py-2 text-sm rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-500 border-gray-300" placeholder="Search..." autocomplete="off" v-model="searchTerm" @keyup="debounceInput">
     </div>
 </template>
 

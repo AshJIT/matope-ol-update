@@ -17,7 +17,7 @@
                 </ul>
             </div>
         </div>
-        <div class="border-t border-gray-300 mt-5" v-if="kin.children_count">
+        <div class="border-t border-gray-300 mt-5" v-if="children.length > 0">
             <div class="flex justify-between my-5">
                 <h1 class="text-xl font-bold">Children</h1>
                 <div class="">

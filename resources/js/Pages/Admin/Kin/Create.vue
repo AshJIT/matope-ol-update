@@ -64,7 +64,7 @@
 
                                 <div class="col-span-6 sm:col-span-4">
                                     <jet-label for="owner" value="Owner" />
-                                    <dropdown v-model="form.owner" class="mt-1 block w-full" :options="owners.data" @filter="getOwners($event)" optionLabel="name" placeholder="Select an owner" :filter="true" filterPlaceholder="Find Owner"/>
+                                    <dropdown v-model="form.owner" class="mt-1 block w-full" ref="owner" :options="owners.data" @filter="getOwners($event)" optionLabel="name" placeholder="Select an owner" :filter="true" filterPlaceholder="Find Owner"/>
                                     <jet-input-error :message="form.errors.owner" class="mt-2" />
                                 </div>
 
@@ -157,8 +157,11 @@ export default {
     methods: {
         updatePassword: function() {
             this.form.post(route('admin.kin.store'), {
-                preserveScroll: true,
-                onSuccess: () => this.form.reset(),
+                preserveScroll: false,
+                onSuccess: () => {
+                    this.form.reset();
+                    this.form.birthdate = this.dateToday;
+                },
                 onError: () => {
                     if (this.form.errors.name) {
                         this.$refs.name.focus()

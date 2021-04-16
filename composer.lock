@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb696767d9833d39543e450a330c0f6c",
+    "content-hash": "cee06f30d3d9381add795b836d77e55f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2818,70 +2818,58 @@
             "time": "2020-08-18T17:17:46+00:00"
         },
         {
-            "name": "spatie/laravel-query-builder",
-            "version": "3.3.4",
+            "name": "svnwa/inertiavuepaginator",
+            "version": "1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spatie/laravel-query-builder.git",
-                "reference": "2e131b0c8ae600b6e3aabb5a1501c721862a0b8f"
+                "url": "https://github.com/svnwa/InertiaVuePaginator.git",
+                "reference": "b2881c6e0189c8c24f4eb9ea589f9fdec3bb6dce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-query-builder/zipball/2e131b0c8ae600b6e3aabb5a1501c721862a0b8f",
-                "reference": "2e131b0c8ae600b6e3aabb5a1501c721862a0b8f",
+                "url": "https://api.github.com/repos/svnwa/InertiaVuePaginator/zipball/b2881c6e0189c8c24f4eb9ea589f9fdec3bb6dce",
+                "reference": "b2881c6e0189c8c24f4eb9ea589f9fdec3bb6dce",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^6.0|^7.0|^8.0",
-                "illuminate/http": "^6.0|^7.0|^8.0",
-                "illuminate/support": "^6.0|^7.0|^8.0",
-                "php": "^7.3|^8.0"
+                "illuminate/support": "~7|~8"
             },
             "require-dev": {
-                "ext-json": "*",
-                "laravel/legacy-factories": "^1.0.4",
-                "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^4.9|^5.8|^6.3",
-                "phpunit/phpunit": "^9.0"
+                "orchestra/testbench": "~5|~6",
+                "phpunit/phpunit": "~9.0"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Spatie\\QueryBuilder\\QueryBuilderServiceProvider"
-                    ]
+                        "Svnwa\\InertiaVuePaginator\\InertiaVuePaginatorServiceProvider"
+                    ],
+                    "aliases": {
+                        "InertiaVuePaginator": "Svnwa\\InertiaVuePaginator\\Facades\\InertiaVuePaginator"
+                    }
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Spatie\\QueryBuilder\\": "src"
+                    "Svnwa\\InertiaVuePaginator\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "license"
             ],
             "authors": [
                 {
-                    "name": "Alex Vanderbist",
-                    "email": "alex@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "name": "author name"
                 }
             ],
-            "description": "Easily build Eloquent queries from API requests",
-            "homepage": "https://github.com/spatie/laravel-query-builder",
+            "description": ":package_description",
+            "homepage": "https://github.com/svnwa/inertiavuepaginator",
             "keywords": [
-                "laravel-query-builder",
-                "spatie"
+                "InertiaVuePaginator",
+                "laravel"
             ],
-            "funding": [
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
-                }
-            ],
-            "time": "2020-11-26T14:51:30+00:00"
+            "time": "2021-03-21T22:39:06+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
