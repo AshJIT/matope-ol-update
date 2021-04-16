@@ -27,7 +27,7 @@
           method: 'get',
           data: {
               page: 1,
-              filter: searchString ? { 'name': searchString } : null
+              name: searchString
           },
           replace: false,
           preserveState: true,

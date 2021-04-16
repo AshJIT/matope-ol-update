@@ -2,8 +2,8 @@
     <navbar></navbar>
     <div class="container mx-auto rounded-md border border-gray-300 py-5 px-10 my-10">
         <h1 class="text-2xl font-bold">Matope Index Listing</h1>
-        <div class="">
-            <pagination :data="kin"></pagination>
+        <div class="py-5">
+            <paginator :paginator="kin"></paginator>
         </div>
         <div class="flex justify-end items-center">
             <input type="checkbox" id="show-images" name="show-images" v-model="showImages">
@@ -21,22 +21,24 @@
                     <img :src="singleKin.current_image_url" alt="kin image" >
                 </inertia-link>
                 <inertia-link :href="'/kin/' + singleKin.slug" class="flex-1 py-5 text-blue-400 hover:text-blue-700">{{ singleKin.name }}</inertia-link>
-                <inertia-link :href="'/owner/' + singleKin.gaian.slug" class="flex-1 py-5 text-blue-400 hover:text-blue-700">{{ singleKin.gaian.name }}</inertia-link>
-                <div class="flex-1 py-5">{{ singleKin.colourist.name }}</div>
+                <inertia-link :href="'/owner/' + singleKin.gaian.slug" class="flex-1 py-5 text-blue-400 hover:text-blue-700" v-if="singleKin.gaian">{{ singleKin.gaian.name }}</inertia-link>
+                <div class="flex-1 py-5" v-if="singleKin.colourist">{{ singleKin.colourist.name }}</div>
             </div>
         </div>
-        <pagination :data="kin"></pagination>
+        <div class="py-5">
+            <paginator :paginator="kin"></paginator>
+        </div>
     </div>
 </template>
 
 <script>
 import Navbar from "@/Components/Nav";
-import Pagination from "@/Components/Pagination";
+import Paginator from "@/Components/Paginator";
 import Search from "@/Components/Search";
 
 export default {
     props: ['kin'],
-    components: { Navbar, Pagination, Search },
+    components: { Navbar, Paginator, Search },
     data: function() {
         return {
             showImages: true,
