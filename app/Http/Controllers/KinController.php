@@ -16,7 +16,7 @@ class KinController extends Controller
 {
     public function show($slug)
     {
-        $kin = Kin::where('slug', $slug)->with(['gaian', 'colourist', 'gender', 'mother', 'father'])->first();
+        $kin = Kin::where('slug', $slug)->with(['gaian', 'colourist', 'gender', 'mother', 'father', 'species'])->first();
 
         $gender = $kin->gender->identifier;
 
@@ -40,7 +40,7 @@ class KinController extends Controller
             'owners' => Gaian::when($request->owner, function($query, $owner) {
                 $query->where('name', 'LIKE', $owner . '%');
             })->orderBy('name', 'asc')->paginate(),
-            'colorist' => Gaian::where('is_colourist', 1)->get()
+            'colorist' => Gaian::where('is_colourist', 1)->orderBy('name', 'asc')->get()
         ]);
     }
 
