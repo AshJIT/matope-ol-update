@@ -11,7 +11,7 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $kin = Kin::when($request->name, function($query, $name) {
-            $query->where('name', 'LIKE', $name . '%');
+            $query->where('name', 'LIKE', '%' . $name . '%');
         })->with(['gaian', 'colourist'])->orderBy('name', 'asc')->paginate()->withQueryString();
 
         return inertia('Index', [
