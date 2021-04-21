@@ -67,4 +67,13 @@ class KinController extends Controller
 
         return Redirect::route('admin.kin.create')->with('flash.banner', 'Kin created successfully!');
     }
+
+    public function update(StoreKin $request, Kin $kin)
+    {
+        $kin->fill($request->validated());
+
+        $kin->save();
+        
+        return back()->with('flash.banner', 'Kin updated successfully!');
+    }
 }

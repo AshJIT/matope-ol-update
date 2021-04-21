@@ -34,6 +34,11 @@
                         </ul>
                     </div>
                 </div>
+                <div class="w-full flex justify-end p-5 mt-5" v-if="$page.props.user">
+                    <div class="">
+                        <inertia-link :href="'/admin/kin/edit/' + kin.id" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition">Edit Kin</inertia-link>
+                    </div>
+                </div>
                 <div class="border-t border-gray-300 mt-5" v-if="children.length > 0">
                     <div class="flex justify-between my-5">
                         <h1 class="text-xl font-bold">Children</h1>
@@ -87,6 +92,9 @@
             certLink: function() {
                 return this.kin.current_image_url.replace('_uncert.png', '.gif');
             }
+        },
+        mounted() {
+            console.log(this.$page);
         },
         methods: {
             groupBy: function(items, key) {
