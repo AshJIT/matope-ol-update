@@ -11,6 +11,23 @@
     </div>
     <div>
       <search @input="search"></search>
+      <div class="block">
+        <span class="text-white">Search by:</span>
+        <div class="mt-2">
+          <div>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-yellow-600" name="radio" value="1" checked v-model="searchBy">
+              <span class="ml-2 text-white">Kin name</span>
+            </label>
+          </div>
+          <div>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-yellow-600" name="radio" value="2" v-model="searchBy">
+              <span class="ml-2 text-white">Owner name</span>
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -21,14 +38,24 @@
 
   export default {
     components: { Search },
+    data: function() {
+      return {
+        searchBy: 1,
+      }
+    },
     methods: {
       search: function(searchString) {
+        let searchTerms = {
+          page: 1,
+        };
+
+        if (searchString) {
+          this.searchBy == 1 ? searchTerms.name = searchString : searchTerms.owner = searchString;
+        }
+
         this.$inertia.visit('/', {
           method: 'get',
-          data: {
-              page: 1,
-              name: searchString
-          },
+          data: searchTerms,
           replace: false,
           preserveState: true,
           preserveScroll: true,

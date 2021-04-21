@@ -10,9 +10,13 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $kin = Kin::when($request->name, function($query, $name) {
+        $kin = Kin::with(['gaian', 'colourist'])->when($request->name, function($query, $name) {
             $query->where('name', 'LIKE', '%' . $name . '%');
-        })->with(['gaian', 'colourist'])->orderBy('name', 'asc')->paginate()->withQueryString();
+        })->when($request->owner, function($query, $owner) {
+            $query->whereHas('gaian', function($query) use ($owner) {
+                $query->where('gaians.name', 'LIKE', '%' . $owner . '%');
+            });
+        })->orderBy('name', 'asc')->paginate()->withQueryString();
 
         return inertia('Index', [
             'kin' => $kin
