@@ -11,6 +11,9 @@
                     <input type="checkbox" id="show-images" name="show-images" v-model="showImages">
                     <label class="ml-2" for="show-images"> Show Images</label><br>
                 </div>
+                <!-- <div class="flex justify-end py-5">
+                    <sort :sortBy="sortBy"></sort>
+                </div> -->
                 <div class="hidden font-bold border-b border-gray-300 py-2 md:grid md:grid-cols-6 md:gap-4">
                     <div class="col-span-2" v-show="showImages">Image</div>
                     <div>Name</div>
@@ -26,7 +29,7 @@
                         <inertia-link :href="'/kin/' + singleKin.slug" class="md:py-5 text-blue-400 hover:text-blue-700">{{ singleKin.name }}</inertia-link>
                         <inertia-link :href="'/owner/' + singleKin.gaian.slug" class="md:py-5 text-blue-400 hover:text-blue-700" v-if="singleKin.gaian">{{ singleKin.gaian.name }}</inertia-link>
                         <inertia-link :href="'/colorist/' + singleKin.colourist.slug" class="md:py-5 text-blue-400 hover:text-blue-700" v-if="singleKin.colourist">{{ singleKin.colourist.name }}</inertia-link>
-                        <div class="md:py-5">{{ singleKin.birthdate }}</div>
+                        <div class="md:py-5">{{ displayBirthdate(singleKin.birthdate) }}</div>
                     </div>
                 </div>
                 <div class="py-5">
@@ -40,6 +43,8 @@
 <script>
     import Paginator from "@/Components/Paginator";
     import Navbar from "@/Components/Nav";
+    import Sort from "@/Components/Sort";
+    import birthdate from "../Mixins/birthdate";
 
     export default {
         props: {
@@ -48,11 +53,14 @@
         },
         components: {
             Paginator,
-            Navbar
+            Navbar,
+            Sort
         },
+        mixins: [ birthdate ],
         data: function() {
             return {
                 showImages: true,
+                sortBy: null
             }
         }
     }

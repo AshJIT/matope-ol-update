@@ -11,7 +11,7 @@
                     <div class="flex-1">
                         <ul>
                             <li><strong>Owner: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/owner/' + kin.gaian.slug">{{ kin.gaian.name }}</inertia-link></li>
-                            <li><strong>Birthdate: </strong> {{ kin.birthdate }}</li>
+                            <li><strong>Birthdate: </strong> {{ displayBirthdate(kin.birthdate) }}</li>
                             <li><strong>Gender: </strong> {{ kin.gender.name }}</li>
                             <li><strong>Species:</strong> {{ kin.species.name }}</li>
                             <li><strong>Colourist: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/colorist/' + kin.colourist.slug" v-if="kin.colourist">{{ kin.colourist.name }}</inertia-link> <span v-else>None</span></li>
@@ -56,7 +56,7 @@
                         </p>
 
                         <div class="flex flex-wrap">
-                            <div v-for="child in breeding" :key="child.id" >
+                            <div v-for="child in breeding" :key="child.id" class="flex justify-center items-end">
                                 <inertia-link :href="'/kin/' + child.slug" class="flex flex-col justify-between items-center">
                                     <img :src="child.current_image_url" :alt="child.name">
                                     <span class="py-5 text-blue-400 hover:text-blue-700">{{ child.name }}</span>
@@ -72,6 +72,7 @@
 
 <script>
     import Navbar from "@/Components/Nav";
+    import birthdate from "../Mixins/birthdate";
 
     export default {
         props: {
@@ -79,6 +80,7 @@
             children: Object
         },
         components: { Navbar },
+        mixins: [ birthdate ],
         data: function() {
             return {
                 showOffspring: true,
@@ -119,7 +121,7 @@
                 setTimeout(() => {
                     this.copy[evnt.target.name] = false;
                 }, 1000);
-            }
+            },
         }
     }
 </script>
