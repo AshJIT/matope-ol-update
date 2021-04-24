@@ -15,7 +15,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/kin/{slug}', 'App\Http\Controllers\KinController@show');
+Route::get('/kin/view/{slug}', 'App\Http\Controllers\KinController@show');
 Route::get('/owner/{slug}', 'App\Http\Controllers\OwnerController@index');
 Route::get('/colorist/{slug}', 'App\Http\Controllers\ColoristController@index');
 Route::get('/', 'App\Http\Controllers\SearchController@index');
@@ -34,7 +34,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     Route::get('admin/kin/list', 'App\Http\Controllers\KinController@list')->name('admin.kin.list');
     Route::post('admin/kin/store', 'App\Http\Controllers\KinController@store')->name('admin.kin.store');
-    Route::put('admin/kin/update/{id}', 'App\Http\Controllers\KinController@update')->name('admin.kin.update');
+    Route::put('admin/kin/update/{kin}', 'App\Http\Controllers\KinController@update')->name('admin.kin.update');
 });
     
 

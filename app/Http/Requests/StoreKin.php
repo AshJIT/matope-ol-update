@@ -20,16 +20,16 @@ class StoreKin extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:255'],
-            'slug' => ['required', 'unique:kin,slug', 'max:255'],
-            'current_image_url' => ['required'],
-            'mother_id' => ['nullable', 'exists:kin,id'],
-            'father_id' => ['nullable', 'exists:kin,id'],
-            'species_id' => ['required', 'numeric'],
-            'owner_id' => ['required', 'numeric'],
-            'colourist_id' => ['required', 'numeric'],
-            'birthdate' => ['required', 'date'],
-            'gender_id' => ['required', 'numeric']
+            'name' => 'required|max:255',
+            'slug' => 'required|max:255|unique:kin,slug,' . $this->kin->id,
+            'current_image_url' => 'required',
+            'mother_id' => 'nullable|exists:kin,id',
+            'father_id' => 'nullable|exists:kin,id',
+            'species_id' => 'required|numeric',
+            'owner_id' => 'required|numeric',
+            'colourist_id' => 'required|numeric',
+            'birthdate' => 'required|date',
+            'gender_id' => 'required|numeric'
         ];
     }
 

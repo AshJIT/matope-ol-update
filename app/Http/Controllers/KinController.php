@@ -74,6 +74,6 @@ class KinController extends Controller
 
         $kin->save();
         
-        return back()->with('flash.banner', 'Kin updated successfully!');
+        return Redirect::back()->with('flash.banner', 'Kin updated successfully!');
     }
 }

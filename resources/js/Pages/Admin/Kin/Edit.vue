@@ -16,18 +16,18 @@
                             </template>
 
                             <template #description>
-                                Change existing kin's data.
-                                <br/>
-                                <div class="my-5" v-if="kin.current_image_url">
+                                <span class="block mb-5">Change existing kin's data.</span>
+                                <inertia-link :href="'/kin/view/' + kin.slug" class="my-5 text-blue-400 hover:text-blue-700" v-if="kin.current_image_url">
                                     <img :src="kin.current_image_url" alt="kin">
-                                </div>
+                                    <span class="my-5 block">Visit Kindex Entry</span>
+                                </inertia-link>
                             </template>
 
                             <template #form>
                                 <div class="col-span-6 sm:col-span-4">
                                     <jet-label for="name" value="Kin Name" />
                                     <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" ref="name" />
-                                    <jet-input-error :message="form.errors.name" class="mt-2" />
+                                    <jet-input-error :message="form.errors.name || form.errors.slug" class="mt-2" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-4">
@@ -155,7 +155,7 @@ export default {
                     this.form.birthdate = this.dateToday;
                 },
                 onError: () => {
-                    if (this.form.errors.name) {
+                    if (this.form.errors.name || this.form.errors.slug) {
                         this.$refs.name.focus()
                     }
 

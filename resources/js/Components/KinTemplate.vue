@@ -23,10 +23,10 @@
                 </div>
                 <div class="odd:bg-blue-100">
                     <div v-for="singleKin in kin.data" :key="singleKin.id" class="border-b border-gray-300 grid grid-cols-1 md:grid-cols-6 gap-4">
-                        <inertia-link :href="'/kin/' + singleKin.slug" class="md:col-span-2 py-5" v-show="showImages">
+                        <inertia-link :href="'/kin/view/' + singleKin.slug" class="md:col-span-2 py-5" v-show="showImages">
                             <img :src="singleKin.current_image_url" alt="kin image" >
                         </inertia-link>
-                        <inertia-link :href="'/kin/' + singleKin.slug" class="md:py-5 text-blue-400 hover:text-blue-700">{{ singleKin.name }}</inertia-link>
+                        <inertia-link :href="'/kin/view/' + singleKin.slug" class="md:py-5 text-blue-400 hover:text-blue-700">{{ singleKin.name }}</inertia-link>
                         <inertia-link :href="'/owner/' + singleKin.gaian.slug" class="md:py-5 text-blue-400 hover:text-blue-700" v-if="singleKin.gaian">{{ singleKin.gaian.name }}</inertia-link>
                         <inertia-link :href="'/colorist/' + singleKin.colourist.slug" class="md:py-5 text-blue-400 hover:text-blue-700" v-if="singleKin.colourist">{{ singleKin.colourist.name }}</inertia-link>
                         <div class="md:py-5">{{ displayBirthdate(singleKin.birthdate) }}</div>

@@ -15,8 +15,8 @@
                             <li><strong>Gender: </strong> {{ kin.gender.name }}</li>
                             <li><strong>Species:</strong> {{ kin.species.name }}</li>
                             <li><strong>Colourist: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/colorist/' + kin.colourist.slug" v-if="kin.colourist">{{ kin.colourist.name }}</inertia-link> <span v-else>None</span></li>
-                            <li><strong>Mother: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/kin/' + kin.mother.slug" v-if="kin.mother">{{ kin.mother.name }}</inertia-link> <span v-else>None</span></li>
-                            <li><strong>Father: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/kin/' + kin.father.slug" v-if="kin.father">{{ kin.father.name }}</inertia-link> <span v-else>None</span></li>
+                            <li><strong>Mother: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/kin/view/' + kin.mother.slug" v-if="kin.mother">{{ kin.mother.name }}</inertia-link> <span v-else>None</span></li>
+                            <li><strong>Father: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/kin/view/' + kin.father.slug" v-if="kin.father">{{ kin.father.name }}</inertia-link> <span v-else>None</span></li>
                         </ul>
 
                         <ul class="mt-5">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="w-full flex justify-end p-5 mt-5" v-if="$page.props.user">
                     <div class="">
-                        <inertia-link :href="'/admin/kin/edit/' + kin.id" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition">Edit Kin</inertia-link>
+                        <inertia-link :href="'/admin/kin/edit/' + kin.id" target="_blank" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition">Edit Kin</inertia-link>
                     </div>
                 </div>
                 <div class="border-t border-gray-300 mt-5" v-if="children.length > 0">
@@ -50,14 +50,14 @@
 
                     <div class="border-b border-gray-300" v-for="(breeding, index) in groupBy(children, 'birthdate')" :key="index" v-show="showOffspring">
                         <p class="my-2">
-                            <inertia-link v-if="breeding[0].mother" class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/' + breeding[0].mother.slug">{{ breeding[0].mother.name }}</inertia-link> <span v-else>???</span>
+                            <inertia-link v-if="breeding[0].mother" class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/view/' + breeding[0].mother.slug">{{ breeding[0].mother.name }}</inertia-link> <span v-else>???</span>
                             <span> x </span>
-                            <inertia-link v-if="breeding[0].father" class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/' + breeding[0].father.slug">{{ breeding[0].father.name }}</inertia-link> <span v-else>???</span>
+                            <inertia-link v-if="breeding[0].father" class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/view/' + breeding[0].father.slug">{{ breeding[0].father.name }}</inertia-link> <span v-else>???</span>
                         </p>
 
                         <div class="flex flex-wrap">
                             <div v-for="child in breeding" :key="child.id" class="flex justify-center items-end">
-                                <inertia-link :href="'/kin/' + child.slug" class="flex flex-col justify-between items-center">
+                                <inertia-link :href="'/kin/view/' + child.slug" class="flex flex-col justify-between items-center">
                                     <img :src="child.current_image_url" :alt="child.name">
                                     <span class="py-5 text-blue-400 hover:text-blue-700">{{ child.name }}</span>
                                 </inertia-link>
@@ -94,9 +94,6 @@
             certLink: function() {
                 return this.kin.current_image_url.replace('_uncert.png', '.gif');
             }
-        },
-        mounted() {
-            console.log(this.$page);
         },
         methods: {
             groupBy: function(items, key) {
