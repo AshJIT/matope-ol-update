@@ -21,7 +21,7 @@ class StoreKin extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'slug' => 'required|max:255|unique:kin,slug,' . $this->kin->id,
+            'slug' => 'required|max:255',
             'current_image_url' => 'required',
             'mother_id' => 'nullable|exists:kin,id',
             'father_id' => 'nullable|exists:kin,id',
