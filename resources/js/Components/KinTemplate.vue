@@ -11,9 +11,9 @@
                     <input type="checkbox" id="show-images" name="show-images" v-model="showImages">
                     <label class="ml-2" for="show-images"> Show Images</label><br>
                 </div>
-                <!-- <div class="flex justify-end py-5">
-                    <sort :sortBy="sortBy"></sort>
-                </div> -->
+                <div class="flex justify-end py-5">
+                    <kin-filter :sortBy="sortBy" @sort="sort" />
+                </div>
                 <div class="hidden font-bold border-b border-gray-300 py-2 md:grid md:grid-cols-6 md:gap-4">
                     <div class="col-span-2" v-show="showImages">Image</div>
                     <div>Name</div>
@@ -43,7 +43,7 @@
 <script>
     import Paginator from "@/Components/Paginator";
     import Navbar from "@/Components/Nav";
-    import Sort from "@/Components/Sort";
+    import KinFilter from "@/Components/Filter";
     import birthdate from "../Mixins/birthdate";
 
     export default {
@@ -54,13 +54,25 @@
         components: {
             Paginator,
             Navbar,
-            Sort
+            KinFilter
         },
         mixins: [ birthdate ],
         data: function() {
             return {
                 showImages: true,
                 sortBy: null
+            }
+        },
+        mounted() {
+            console.log(this.kin);
+        },
+        methods: {
+            sort: function(sortType) {
+                this.$inertia.reload({
+                    data: {
+                        sort: sortType
+                    }
+                })
             }
         }
     }
