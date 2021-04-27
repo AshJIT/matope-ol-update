@@ -19,7 +19,7 @@ class SearchController extends Controller
             ->join('gaians as owner', 'kin.owner_id', '=', 'owner.id')
             ->join('kin_species as species', 'kin.species_id', '=', 'species.id')
             ->select('kin.*', 'species.name as species_name')
-            ->allowedFilters(['name', 'colourist.name', 'gaian.name'])
+            ->allowedFilters(['name', 'colourist.name', 'owner.name'])
             ->allowedSorts('kin.name', 'kin.birthdate', 'colourist.name', 'gender.name', 'owner.name', 'species.name')
             ->paginate()
             ->withQueryString();

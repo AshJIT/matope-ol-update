@@ -50,7 +50,7 @@
         };
 
         if (searchString) {
-          this.searchBy == 1 ? searchTerms["filter[name]"] = searchString : searchTerms["filter[owner]"] = searchString;
+          this.searchBy == 1 ? searchTerms["filter[name]"] = searchString : searchTerms["filter[owner.name]"] = searchString;
         }
 
         this.$inertia.visit('/', {

@@ -14,8 +14,8 @@
                         <label class="inline-flex items-center">
                             <button class="m-1 px-3 py-1 border-2 border-blue-300 rounded-full" @click="applySort(type)">
                                 <span class="mr-2">{{ type.name }}</span>
-                                <icon class="inline-block" type="chevron-up" v-show="type.sorting === 'asc'"></icon>
-                                <icon class="inline-block" type="chevron-down" v-show="type.sorting === 'desc'"></icon>
+                                <icon class="inline-block" type="chevron-up" v-show="type.sorting === 'desc'"></icon>
+                                <icon class="inline-block" type="chevron-down" v-show="type.sorting === 'asc'"></icon>
                             </button>
                         </label>
                     </div>
