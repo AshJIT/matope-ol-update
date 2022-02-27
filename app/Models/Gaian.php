@@ -25,4 +25,8 @@ class Gaian extends Model
     public function kin() {
        return $this->hasMany(Kin::class);
     }
+
+    public function familiar() {
+        return $this->hasMany(Familiar::class);
+     }
 }

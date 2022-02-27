@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class Kin extends Model
+class Familiar extends Model
 {
     use HasFactory;
+    use Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -18,18 +20,31 @@ class Kin extends Model
         'name',
         'slug',
         'current_image_url',
-        'mother_id',
-        'father_id',
-        'species_id',
-        'current_kin_phase_id',
+        'familiar_species_id',
+        'kin_id',
         'owner_id',
         'colourist_id',
-        'birthdate',
         'created_at',
         'updated_at',
-        'gender_id',
-        'children_count'
     ];
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
+    public function kin() {
+        return $this->belongsTo(Kin::class, 'kin_id');
+    }
 
     public function gaian() {
         return $this->belongsTo(Gaian::class, 'owner_id');
@@ -39,23 +54,7 @@ class Kin extends Model
         return $this->belongsTo(Gaian::class, 'colourist_id');
     }
 
-    public function gender() {
-        return $this->belongsTo(Gender::class, 'gender_id');
-    }
-
     public function species() {
-        return $this->belongsTo(KinSpecies::class, 'species_id');
-    }
-
-    public function mother() {
-        return $this->belongsTo(Kin::class, 'mother_id');
-    }
-
-    public function father() {
-        return $this->belongsTo(Kin::class, 'father_id');
-    }
-
-    public function familiar() {
-        return $this->hasMany(Familiar::class);
+        return $this->belongsTo(KinSpecies::class, 'familiar_species_id');
     }
 }

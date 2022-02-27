@@ -32,9 +32,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('admin/kin/create', 'App\Http\Controllers\KinController@create')->name('admin.kin.create');
     Route::get('admin/kin/edit/{id}', 'App\Http\Controllers\KinController@edit')->name('admin.kin.edit');
 
+    Route::get('admin/familiar/create', 'App\Http\Controllers\FamiliarController@create')->name('admin.familiar.create');
+
     Route::get('admin/kin/list', 'App\Http\Controllers\KinController@list')->name('admin.kin.list');
     Route::post('admin/kin/store', 'App\Http\Controllers\KinController@store')->name('admin.kin.store');
     Route::put('admin/kin/update/{kin}', 'App\Http\Controllers\KinController@update')->name('admin.kin.update');
+
+    Route::post('admin/familiar/store', 'App\Http\Controllers\FamiliarController@store')->name('admin.familiar.store');
 });
     
 
