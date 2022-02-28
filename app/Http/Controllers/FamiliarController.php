@@ -15,6 +15,13 @@ use App\Models\Gaian;
 
 class FamiliarController extends Controller
 {
+    public function index()
+    {
+        return inertia('Familiar', [
+            'familiars' => Familiar::with(['gaian', 'species', 'colourist', 'kin'])->paginate()
+        ]);
+    }
+
     public function show($slug)
     {
     }

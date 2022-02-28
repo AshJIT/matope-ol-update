@@ -18,6 +18,7 @@ use Inertia\Inertia;
 Route::get('/kin/view/{slug}', 'App\Http\Controllers\KinController@show');
 Route::get('/owner/{slug}', 'App\Http\Controllers\OwnerController@index');
 Route::get('/colorist/{slug}', 'App\Http\Controllers\ColoristController@index');
+Route::get('/familiars', 'App\Http\Controllers\FamiliarController@index');
 Route::get('/', 'App\Http\Controllers\SearchController@index');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

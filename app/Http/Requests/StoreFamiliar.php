@@ -27,6 +27,7 @@ class StoreFamiliar extends FormRequest
             'kin_id' => 'nullable|numeric',
             'owner_id' => 'required|numeric',
             'colourist_id' => 'nullable|numeric',
+            'cert_url' => 'required',
         ];
     }
 
@@ -43,7 +44,8 @@ class StoreFamiliar extends FormRequest
             'kin_id' => $this->kin ? $this->kin['id'] : null,
             'owner_id' => $this->kin ? Kin::where('id', $this->kin['id'])->first()->owner_id : ($this->owner ? $this->owner['id'] : null),
             'colourist_id' => $this->colorist ? $this->colorist['id'] : null,
-            'current_image_url' => $this->current_image_url ? $this->current_image_url : null
+            'current_image_url' => $this->current_image_url ? $this->current_image_url : null,
+            'cert_url' => $this->cert_url ? $this->cert_url : null
         ]);
     }
 }

@@ -33,9 +33,15 @@
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-4">
-                                    <jet-label for="current_image_url" value="Img URL" />
-                                    <jet-input id="curent_image_url" type="text" class="mt-1 block w-full" v-model="form.current_image_url" />
+                                    <jet-label for="current_image_url" value="Uncert URL" />
+                                    <jet-input id="curent_image_url" type="text" class="mt-1 block w-full" @change="form.cert_url = $event.target.value.replace('_uncert.png', '.gif')" v-model="form.current_image_url" />
                                     <jet-input-error :message="form.errors.current_image_url" class="mt-2" />
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-4">
+                                    <jet-label for="cert_url" value="Cert URL" />
+                                    <jet-input id="cert_url" type="text" class="mt-1 block w-full" v-model="form.cert_url" />
+                                    <jet-input-error :message="form.errors.cert_url" class="mt-2" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-4">
@@ -112,10 +118,17 @@ export default {
                 name: '',
                 familiar_species: '',
                 current_image_url: '',
+                cert_url: '',
                 kin: '',
                 owner: '',
                 colorist: ''
             })
+        }
+    },
+
+    computed: {
+        certLink: function() {
+            this.form.current_image_url ? this.form.current_image_url.replace('_uncert.png', '.gif') : null;
         }
     },
 

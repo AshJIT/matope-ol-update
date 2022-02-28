@@ -20,6 +20,7 @@ class Familiar extends Model
         'name',
         'slug',
         'current_image_url',
+        'cert_url',
         'familiar_species_id',
         'kin_id',
         'owner_id',
@@ -55,6 +56,6 @@ class Familiar extends Model
     }
 
     public function species() {
-        return $this->belongsTo(KinSpecies::class, 'familiar_species_id');
+        return $this->belongsTo(FamiliarSpecies::class, 'familiar_species_id');
     }
 }
