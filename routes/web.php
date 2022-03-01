@@ -19,6 +19,7 @@ Route::get('/kin/view/{slug}', 'App\Http\Controllers\KinController@show');
 Route::get('/owner/{slug}', 'App\Http\Controllers\OwnerController@index');
 Route::get('/colorist/{slug}', 'App\Http\Controllers\ColoristController@index');
 Route::get('/familiars', 'App\Http\Controllers\FamiliarController@index');
+Route::get('/familiar/view/{slug}', 'App\Http\Controllers\FamiliarController@show');
 Route::get('/', 'App\Http\Controllers\SearchController@index');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -34,6 +35,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('admin/kin/edit/{id}', 'App\Http\Controllers\KinController@edit')->name('admin.kin.edit');
 
     Route::get('admin/familiar/create', 'App\Http\Controllers\FamiliarController@create')->name('admin.familiar.create');
+    Route::get('admin/familiar/edit/{id}', 'App\Http\Controllers\FamiliarController@edit')->name('admin.familiar.edit');
+    Route::put('admin/familiar/update/{familiar}', 'App\Http\Controllers\FamiliarController@update')->name('admin.familiar.update');
 
     Route::get('admin/kin/list', 'App\Http\Controllers\KinController@list')->name('admin.kin.list');
     Route::post('admin/kin/store', 'App\Http\Controllers\KinController@store')->name('admin.kin.store');
