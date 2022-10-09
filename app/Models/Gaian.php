@@ -22,11 +22,13 @@ class Gaian extends Model
         'coloured_kin_count'
     ];
 
-    public function kin() {
-       return $this->hasMany(Kin::class);
+    public function kin()
+    {
+        return $this->hasMany(Kin::class, 'owner_id');
     }
 
-    public function familiar() {
-        return $this->hasMany(Familiar::class);
-     }
+    public function familiar()
+    {
+        return $this->hasMany(Familiar::class, 'owner_id');
+    }
 }

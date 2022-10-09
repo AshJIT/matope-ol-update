@@ -26,22 +26,14 @@ class OwnerController extends Controller
             ->select('kin.*', 'species.name as species_name')
             ->allowedFilters(['name', 'colourist.name', 'gaian.name'])
             ->allowedSorts('kin.name', 'kin.birthdate', 'colourist.name', 'gender.name', 'owner.name', 'species.name')
-            ->paginate(15, ['*'], 'kin_page', null)
-            ->withQueryString();
-
-        $familiars = QueryBuilder::for(Familiar::class)
-            ->whereHas('gaian', function ($query) use ($slug) {
-                $query->where('slug', $slug);
-            })->with(['gaian', 'colourist', 'species'])
-            ->paginate(15, ['*'], 'familiar_page', null)
+            ->paginate()
             ->withQueryString();
 
         $owner = Gaian::where('slug', $slug)->first();
 
-        return inertia('Owner', [
+        return inertia('Owner/Kin', [
             'kin' => $kin,
-            'owner' => $owner,
-            'familiars' => $familiars
+            'owner' => $owner
         ]);
     }
 }

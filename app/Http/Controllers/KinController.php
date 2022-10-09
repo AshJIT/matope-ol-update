@@ -11,6 +11,7 @@ use App\Models\Kin;
 use App\Models\Gender;
 use App\Models\KinSpecies;
 use App\Models\Gaian;
+use App\Models\Familiar;
 
 class KinController extends Controller
 {
@@ -20,48 +21,49 @@ class KinController extends Controller
 
         return inertia('Kin', [
             'kin' => $kin,
-            'children' => Kin::with(['mother', 'father'])->where('father_id', $kin->id)->orWhere('mother_id', $kin->id)->get()
+            'children' => Kin::with(['mother', 'father'])->where('father_id', $kin->id)->orWhere('mother_id', $kin->id)->get(),
+            'familiars' => Familiar::where('kin_id', $kin->id)->get()
         ]);
     }
 
-    public function create(Request $request) 
+    public function create(Request $request)
     {
         return inertia('Admin/Kin/Create', [
             'gender' => Gender::all(),
             'species' => KinSpecies::all(),
-            'mothers' => Kin::when($request->mom, function($query, $mom) {
+            'mothers' => Kin::when($request->mom, function ($query, $mom) {
                 $query->where('name', 'LIKE', $mom . '%');
             })->orderBy('name', 'asc')->paginate(),
-            'fathers' => Kin::when($request->dad, function($query, $dad) {
+            'fathers' => Kin::when($request->dad, function ($query, $dad) {
                 $query->where('name', 'LIKE', $dad . '%');
             })->orderBy('name', 'asc')->paginate(),
-            'owners' => Gaian::when($request->owner, function($query, $owner) {
+            'owners' => Gaian::when($request->owner, function ($query, $owner) {
                 $query->where('name', 'LIKE', $owner . '%');
             })->orderBy('name', 'asc')->paginate(),
             'colorist' => Gaian::where('is_colourist', 1)->orderBy('name', 'asc')->get()
         ]);
     }
 
-    public function edit(Request $request, $id) 
+    public function edit(Request $request, $id)
     {
         return inertia('Admin/Kin/Edit', [
             'kin' => Kin::where('id', $id)->with(['gender', 'gaian', 'colourist', 'species', 'mother', 'father'])->first(),
             'gender' => Gender::all(),
             'species' => KinSpecies::all(),
-            'mothers' => Kin::when($request->mom, function($query, $mom) {
+            'mothers' => Kin::when($request->mom, function ($query, $mom) {
                 $query->where('name', 'LIKE', $mom . '%');
             })->orderBy('name', 'asc')->paginate(),
-            'fathers' => Kin::when($request->dad, function($query, $dad) {
+            'fathers' => Kin::when($request->dad, function ($query, $dad) {
                 $query->where('name', 'LIKE', $dad . '%');
             })->orderBy('name', 'asc')->paginate(),
-            'owners' => Gaian::when($request->owner, function($query, $owner) {
+            'owners' => Gaian::when($request->owner, function ($query, $owner) {
                 $query->where('name', 'LIKE', $owner . '%');
             })->orderBy('name', 'asc')->paginate(),
             'colorist' => Gaian::where('is_colourist', 1)->orderBy('name', 'asc')->get()
         ]);
     }
 
-    public function store(StoreKin $request) 
+    public function store(StoreKin $request)
     {
         Kin::create($request->validated());
 
@@ -73,7 +75,7 @@ class KinController extends Controller
         $kin->fill($request->validated());
 
         $kin->save();
-        
+
         return Redirect::back()->with('flash.banner', 'Kin updated successfully!');
     }
 }
