@@ -1,8 +1,8 @@
 <template>
     <navbar></navbar>
-    <div class="sm:py-12">
+    <div class="sm:py-12 bg-matope-tan">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-5">
+            <div class="bg-matope-lighttan overflow-hidden shadow-xl sm:rounded-lg px-5">
                 <h1 class="text-3xl font-bold pt-5">{{ title }}</h1>
                 <div class="py-5">
                     <paginator :paginator="kin"></paginator>
@@ -23,13 +23,7 @@
                 </div>
                 <div class="odd:bg-blue-100">
                     <div v-for="singleKin in kin.data" :key="singleKin.id" class="border-b border-gray-300 grid grid-cols-1 md:grid-cols-6 gap-4">
-                        <inertia-link :href="'/kin/view/' + singleKin.slug" class="md:col-span-2 py-5" v-show="showImages">
-                            <img :src="singleKin.current_image_url" alt="kin image" >
-                        </inertia-link>
-                        <inertia-link :href="'/kin/view/' + singleKin.slug" class="md:py-5 text-blue-400 hover:text-blue-700">{{ singleKin.name }}</inertia-link>
-                        <inertia-link :href="'/owner/' + singleKin.gaian.slug" class="md:py-5 text-blue-400 hover:text-blue-700" v-if="singleKin.gaian">{{ singleKin.gaian.name }}</inertia-link>
-                        <inertia-link :href="'/colorist/' + singleKin.colourist.slug" class="md:py-5 text-blue-400 hover:text-blue-700" v-if="singleKin.colourist">{{ singleKin.colourist.name }}</inertia-link>
-                        <div class="md:py-5">{{ displayBirthdate(singleKin.birthdate) }}</div>
+                        <kin :showImages="showImages" :kin="singleKin"></kin>
                     </div>
                 </div>
                 <div class="py-5">
@@ -44,6 +38,7 @@
     import Paginator from "@/Components/Paginator";
     import Navbar from "@/Components/Nav";
     import KinFilter from "@/Components/Filter";
+    import Kin from "@/Components/Kin";
     import birthdate from "../Mixins/birthdate";
 
     export default {
@@ -54,7 +49,8 @@
         components: {
             Paginator,
             Navbar,
-            KinFilter
+            KinFilter,
+            Kin
         },
         mixins: [ birthdate ],
         data: function() {
