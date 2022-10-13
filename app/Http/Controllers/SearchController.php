@@ -28,11 +28,7 @@ class SearchController extends Controller
 
         $familiars = QueryBuilder::for(Familiar::class)
             ->with(['gaian', 'colourist', 'species'])
-            ->join('gaians as colourist', 'familiars.colourist_id', '=', 'colourist.id')
-            ->join('gaians as owner', 'familiars.owner_id', '=', 'owner.id')
-            ->join('familiar_species as species', 'familiars.familiar_species_id', '=', 'species.id')
             ->allowedFilters(['name'])
-            ->select('familiars.*', 'species.name as species_name')
             ->paginate(15, ['*'], 'familiar_page', null)
             ->withQueryString();
 
