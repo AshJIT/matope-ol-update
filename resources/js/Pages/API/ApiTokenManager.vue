@@ -100,7 +100,7 @@
                     Please copy your new API token. For your security, it won't be shown again.
                 </div>
 
-                <div class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500" v-if="$page.props.jetstream.flash.token">
+                <div class="mt-4 bg-gray-100 px-4 py-2 rounded-sm font-mono text-sm text-gray-500" v-if="$page.props.jetstream.flash.token">
                     {{ $page.props.jetstream.flash.token }}
                 </div>
             </template>
@@ -164,6 +164,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/vue3'
     import JetActionMessage from '@/Jetstream/ActionMessage'
     import JetActionSection from '@/Jetstream/ActionSection'
     import JetButton from '@/Jetstream/Button'
@@ -203,16 +204,16 @@
 
         data() {
             return {
-                createApiTokenForm: this.$inertia.form({
+                createApiTokenForm: useForm({
                     name: '',
                     permissions: this.defaultPermissions,
                 }),
 
-                updateApiTokenForm: this.$inertia.form({
+                updateApiTokenForm: useForm({
                     permissions: []
                 }),
 
-                deleteApiTokenForm: this.$inertia.form(),
+                deleteApiTokenForm: useForm({}),
 
                 displayingToken: false,
                 managingPermissionsFor: null,

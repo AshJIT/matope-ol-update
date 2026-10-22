@@ -35,7 +35,7 @@
                             <div class="text-xs text-gray-500">
                                 {{ session.ip_address }},
 
-                                <span class="text-green-500 font-semibold" v-if="session.is_current_device">This device</span>
+                                <span class="text-emerald-500 font-semibold" v-if="session.is_current_device">This device</span>
                                 <span v-else>Last active {{ session.last_active }}</span>
                             </div>
                         </div>
@@ -87,6 +87,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/vue3'
     import JetActionMessage from '@/Jetstream/ActionMessage'
     import JetActionSection from '@/Jetstream/ActionSection'
     import JetButton from '@/Jetstream/Button'
@@ -112,7 +113,7 @@
             return {
                 confirmingLogout: false,
 
-                form: this.$inertia.form({
+                form: useForm({
                     password: '',
                 })
             }

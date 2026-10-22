@@ -8,7 +8,7 @@
             Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
         </div>
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="status" class="mb-4 font-medium text-sm text-emerald-600">
             {{ status }}
         </div>
 
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/vue3'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import JetButton from '@/Jetstream/Button'
@@ -53,7 +54,7 @@
 
         data() {
             return {
-                form: this.$inertia.form({
+                form: useForm({
                     email: ''
                 })
             }

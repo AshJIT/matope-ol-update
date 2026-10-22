@@ -9,10 +9,10 @@
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
-                            <div class="flex-shrink-0 flex items-center">
-                                <inertia-link href="/">
+                            <div class="shrink-0 flex items-center">
+                                <Link href="/">
                                    <img src="https://matope.pixel-blueberry.com/forums/Themes/Fumes/images/logo.png" alt="Matope home of the kimeti">
-                                </inertia-link>
+                                </Link>
                             </div>
 
                             <!-- Navigation Links -->
@@ -32,7 +32,7 @@
                                 <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-hidden focus:bg-gray-50 active:bg-gray-50 transition">
                                                 {{ $page.props.user.current_team.name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -70,7 +70,7 @@
                                                     <form @submit.prevent="switchToTeam(team)">
                                                         <jet-dropdown-link as="button">
                                                             <div class="flex items-center">
-                                                                <svg v-if="team.id == $page.props.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                                <svg v-if="team.id == $page.props.user.current_team_id" class="mr-2 h-5 w-5 text-emerald-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                                                 <div>{{ team.name }}</div>
                                                             </div>
                                                         </jet-dropdown-link>
@@ -86,12 +86,12 @@
                             <div class="ml-3 relative">
                                 <jet-dropdown align="right" width="48">
                                     <template #trigger>
-                                        <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                        <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-hidden focus:border-gray-300 transition">
                                             <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                                         </button>
 
                                         <span v-else class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-hidden transition">
                                                 {{ $page.props.user.name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -130,7 +130,7 @@
 
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
-                            <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
+                            <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 focus:text-gray-500 transition">
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                                     <path :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -151,7 +151,7 @@
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="flex items-center px-4">
-                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
+                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 mr-3" >
                                 <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                             </div>
 
@@ -205,7 +205,7 @@
                                     <form @submit.prevent="switchToTeam(team)">
                                         <jet-responsive-nav-link as="button">
                                             <div class="flex items-center">
-                                                <svg v-if="team.id == $page.props.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                <svg v-if="team.id == $page.props.user.current_team_id" class="mr-2 h-5 w-5 text-emerald-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                                 <div>{{ team.name }}</div>
                                             </div>
                                         </jet-responsive-nav-link>
@@ -218,7 +218,7 @@
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-gray-700 shadow" v-if="$slots.header">
+            <header class="bg-gray-700 shadow-sm" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header"></slot>
                 </div>

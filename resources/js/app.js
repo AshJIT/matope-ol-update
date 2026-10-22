@@ -1,23 +1,20 @@
-require('./bootstrap');
+import './bootstrap';
 
 // Import modules...
 import { createApp, h } from 'vue';
-import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
-import { InertiaProgress } from '@inertiajs/progress';
+import { createInertiaApp, Link } from '@inertiajs/vue3';
 import PrimeVue from 'primevue/config';
+import Aura from '@primeuix/themes/aura';
 
-const el = document.getElementById('app');
-
-createApp({
-    render: () =>
-        h(InertiaApp, {
-            initialPage: JSON.parse(el.dataset.page),
-            resolveComponent: (name) => require(`./Pages/${name}`).default,
-        }),
-})
-    .mixin({ methods: { route } })
-    .use(InertiaPlugin)
-    .use(PrimeVue)
-    .mount(el);
-
-InertiaProgress.init({ color: '#4B5563' });
+createInertiaApp({
+    resolve: (name) => import.meta.glob('./Pages/**/*.vue')[`./Pages/${name}.vue`](),
+    setup({ el, App, props, plugin }) {
+        createApp({ render: () => h(App, props) })
+            .mixin({ methods: { route } })
+            .use(plugin)
+            .use(PrimeVue, { theme: { preset: Aura } })
+            .component('Link', Link)
+            .mount(el);
+    },
+    progress: { color: '#4B5563' },
+});

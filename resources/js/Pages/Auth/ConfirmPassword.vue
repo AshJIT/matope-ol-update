@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/vue3'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import JetButton from '@/Jetstream/Button'
@@ -45,7 +46,7 @@
 
         data() {
             return {
-                form: this.$inertia.form({
+                form: useForm({
                     password: '',
                 })
             }

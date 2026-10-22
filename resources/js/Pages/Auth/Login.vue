@@ -6,7 +6,7 @@
 
         <jet-validation-errors class="mb-4" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="status" class="mb-4 font-medium text-sm text-emerald-600">
             {{ status }}
         </div>
 
@@ -29,9 +29,9 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <inertia-link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
                     Forgot your password?
-                </inertia-link>
+                </Link>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/vue3'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import JetButton from '@/Jetstream/Button'
@@ -68,7 +69,7 @@
 
         data() {
             return {
-                form: this.$inertia.form({
+                form: useForm({
                     email: '',
                     password: '',
                     remember: false

@@ -10,25 +10,25 @@
                     </div>
                     <div class="flex-1">
                         <ul>
-                            <li><strong>Owner: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/owner/' + kin.gaian.slug">{{ kin.gaian.name }}</inertia-link></li>
+                            <li><strong>Owner: </strong> <Link class="text-blue-400 hover:text-blue-700" :href="'/owner/' + kin.gaian.slug">{{ kin.gaian.name }}</Link></li>
                             <li><strong>Birthdate: </strong> {{ kin.birthdate }}</li>
                             <li><strong>Gender: </strong> {{ kin.gender.name }}</li>
                             <li><strong>Species:</strong> {{ kin.species.name }}</li>
-                            <li><strong>Colourist: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/colorist/' + kin.colourist.slug" v-if="kin.colourist">{{ kin.colourist.name }}</inertia-link> <span v-else>None</span></li>
-                            <li><strong>Mother: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/kin/' + kin.mother.slug" v-if="kin.mother">{{ kin.mother.name }}</inertia-link> <span v-else>None</span></li>
-                            <li><strong>Father: </strong> <inertia-link class="text-blue-400 hover:text-blue-700" :href="'/kin/' + kin.father.slug" v-if="kin.father">{{ kin.father.name }}</inertia-link> <span v-else>None</span></li>
+                            <li><strong>Colourist: </strong> <Link class="text-blue-400 hover:text-blue-700" :href="'/colorist/' + kin.colourist.slug" v-if="kin.colourist">{{ kin.colourist.name }}</Link> <span v-else>None</span></li>
+                            <li><strong>Mother: </strong> <Link class="text-blue-400 hover:text-blue-700" :href="'/kin/' + kin.mother.slug" v-if="kin.mother">{{ kin.mother.name }}</Link> <span v-else>None</span></li>
+                            <li><strong>Father: </strong> <Link class="text-blue-400 hover:text-blue-700" :href="'/kin/' + kin.father.slug" v-if="kin.father">{{ kin.father.name }}</Link> <span v-else>None</span></li>
                         </ul>
 
                         <ul class="mt-5">
                             <li>
                                 <label class="block font-bold" for="uncert">Uncert Link:</label>
-                                <span class="inline-block bg-purple-400 text-white px-2 float-right" v-if="copy.uncert">Copied!</span>
+                                <span class="inline-block bg-violet-400 text-white px-2 float-right" v-if="copy.uncert">Copied!</span>
                                 <input class="border-gray-300 rounded-md mt-1 block w-full" type="text" name="uncert" :value="kin.current_image_url" @click="copyURL">
                             </li>
                             <li class="mt-5">
                                 <label class="block font-bold" for="cert">Cert Link:</label>
                                 <span class="block text-xs">Cert links may not work for older kin.</span>
-                                <span class="inline-block bg-purple-400 text-white px-2 float-right" v-if="copy.cert">Copied!</span>
+                                <span class="inline-block bg-violet-400 text-white px-2 float-right" v-if="copy.cert">Copied!</span>
                                 <input class="border-gray-300 rounded-md mt-1 block w-full" name="cert" type="text" :value="certLink" @click="copyURL">
                             </li>
                         </ul>
@@ -38,24 +38,24 @@
                     <div class="flex justify-between my-5">
                         <h1 class="text-xl font-bold">Children</h1>
                         <div class="">
-                            <input class="rounded" type="checkbox" id="show-offspring" name="show-offspring" v-model="showOffspring">
+                            <input class="rounded-sm" type="checkbox" id="show-offspring" name="show-offspring" v-model="showOffspring">
                             <label class="ml-2" for="show-images"> Show Offspring</label><br>
                         </div>
                     </div>
 
                     <div class="border-b border-gray-300" v-for="(breeding, index) in groupBy(children, 'birthdate')" :key="index" v-show="showOffspring">
                         <p class="my-2">
-                            <inertia-link v-if="breeding[0].mother" class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/' + breeding[0].mother.slug">{{ breeding[0].mother.name }}</inertia-link> <span v-else>???</span>
+                            <Link v-if="breeding[0].mother" class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/' + breeding[0].mother.slug">{{ breeding[0].mother.name }}</Link> <span v-else>???</span>
                             <span> x </span>
-                            <inertia-link v-if="breeding[0].father" class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/' + breeding[0].father.slug">{{ breeding[0].father.name }}</inertia-link> <span v-else>???</span>
+                            <Link v-if="breeding[0].father" class="py-5 text-blue-400 hover:text-blue-700" :href="'/kin/' + breeding[0].father.slug">{{ breeding[0].father.name }}</Link> <span v-else>???</span>
                         </p>
 
                         <div class="flex flex-wrap">
                             <div v-for="child in breeding" :key="child.id" >
-                                <inertia-link :href="'/kin/' + child.slug" class="flex flex-col justify-between items-center">
+                                <Link :href="'/kin/' + child.slug" class="flex flex-col justify-between items-center">
                                     <img :src="child.current_image_url" :alt="child.name">
                                     <span class="py-5 text-blue-400 hover:text-blue-700">{{ child.name }}</span>
-                                </inertia-link>
+                                </Link>
                             </div>
                         </div>
                     </div>

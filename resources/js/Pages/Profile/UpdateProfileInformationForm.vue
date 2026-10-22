@@ -69,6 +69,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/vue3'
     import JetButton from '@/Jetstream/Button'
     import JetFormSection from '@/Jetstream/FormSection'
     import JetInput from '@/Jetstream/Input'
@@ -92,7 +93,7 @@
 
         data() {
             return {
-                form: this.$inertia.form({
+                form: useForm({
                     _method: 'PUT',
                     name: this.user.name,
                     email: this.user.email,

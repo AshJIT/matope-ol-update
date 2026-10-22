@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { useForm } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout';
 import JetActionMessage from '@/Jetstream/ActionMessage';
 import JetButton from '@/Jetstream/Button';
@@ -100,8 +101,8 @@ import JetFormSection from '@/Jetstream/FormSection';
 import JetInput from '@/Jetstream/Input';
 import JetInputError from '@/Jetstream/InputError';
 import JetLabel from '@/Jetstream/Label';
-import Calendar from 'primevue/calendar';
-import Dropdown from 'primevue/dropdown';
+import DatePicker from 'primevue/datepicker';
+import Select from 'primevue/select';
 import _ from 'lodash';
 
 export default {
@@ -121,12 +122,12 @@ export default {
         JetInput,
         JetInputError,
         JetLabel,
-        Calendar,
-        Dropdown
+        Calendar: DatePicker,
+        Dropdown: Select
     },
     data: function() {
         return {
-            form: this.$inertia.form({
+            form: useForm({
                 name: '',
                 gender: '',
                 species: '',

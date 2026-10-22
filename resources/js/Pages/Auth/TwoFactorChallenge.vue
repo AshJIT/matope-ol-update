@@ -47,6 +47,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/vue3'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import JetButton from '@/Jetstream/Button'
@@ -67,7 +68,7 @@
         data() {
             return {
                 recovery: false,
-                form: this.$inertia.form({
+                form: useForm({
                     code: '',
                     recovery_code: '',
                 })

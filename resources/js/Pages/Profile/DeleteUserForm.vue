@@ -53,6 +53,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/vue3'
     import JetActionSection from '@/Jetstream/ActionSection'
     import JetDialogModal from '@/Jetstream/DialogModal'
     import JetDangerButton from '@/Jetstream/DangerButton'
@@ -74,7 +75,7 @@
             return {
                 confirmingUserDeletion: false,
 
-                form: this.$inertia.form({
+                form: useForm({
                     password: '',
                 })
             }

@@ -41,6 +41,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/vue3'
     import JetActionMessage from '@/Jetstream/ActionMessage'
     import JetButton from '@/Jetstream/Button'
     import JetFormSection from '@/Jetstream/FormSection'
@@ -60,7 +61,7 @@
 
         data() {
             return {
-                form: this.$inertia.form({
+                form: useForm({
                     current_password: '',
                     password: '',
                     password_confirmation: '',

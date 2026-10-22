@@ -1,13 +1,13 @@
 <template>
 <nav class="flex items-center justify-between flex-wrap bg-gray-700 p-6">
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <inertia-link href="/">
+  <div class="flex items-center shrink-0 text-white mr-6">
+    <Link href="/">
       <img src="https://matope.pixel-blueberry.com/forums/Themes/Fumes/images/logo.png" alt="Matope home of the kimeti">
-    </inertia-link>
+    </Link>
   </div>
-  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-sm lg:flex-grow">
-      <a href="https://matope-swamp.com/forums/" target="_blank" class="inline-block text-base px-4 py-2 leading-none text-white hover:text-yellow-200 mt-4 lg:mt-0">Join the Forums</a>
+  <div class="w-full block grow lg:flex lg:items-center lg:w-auto">
+    <div class="text-sm lg:grow">
+      <a href="https://matope-swamp.com/forums/" target="_blank" class="inline-block text-base px-4 py-2 leading-none text-white hover:text-amber-200 mt-4 lg:mt-0">Join the Forums</a>
     </div>
     <div>
       <search @input="search"></search>
