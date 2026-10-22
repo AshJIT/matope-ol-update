@@ -8,13 +8,15 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
+        "cviebrock/eloquent-sluggable": "^13.0",
         "guzzlehttp/guzzle": "^7.8",
         "inertiajs/inertia-laravel": "^3.0",
         "laravel/framework": "^13.0",
         "laravel/jetstream": "^5.5",
         "laravel/sanctum": "^4.3",
         "laravel/tinker": "^3.0",
+        "spatie/laravel-query-builder": "^7.3",
         "tightenco/ziggy": "^2.6"
     },
     "require-dev": {

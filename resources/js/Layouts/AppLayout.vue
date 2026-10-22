@@ -23,6 +23,9 @@
                                 <jet-nav-link :href="route('admin.kin.create')" :active="route().current('admin.kin.create')">
                                     Add Kin
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('admin.familiar.create')" :active="route().current('admin.familiar.create')">
+                                    Add Familiar
+                                </jet-nav-link>
                             </div>
                         </div>
 

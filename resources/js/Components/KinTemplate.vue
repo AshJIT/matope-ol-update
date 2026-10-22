@@ -1,8 +1,8 @@
 <template>
     <navbar></navbar>
-    <div class="sm:py-12">
+    <div class="sm:py-12 bg-matope-tan">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-5">
+            <div class="bg-matope-lighttan overflow-hidden shadow-xl sm:rounded-lg px-5">
                 <h1 class="text-3xl font-bold pt-5">{{ title }}</h1>
                 <div class="py-5">
                     <paginator :paginator="kin"></paginator>
@@ -10,6 +10,9 @@
                 <div class="flex justify-end items-center">
                     <input type="checkbox" id="show-images" name="show-images" v-model="showImages">
                     <label class="ml-2" for="show-images"> Show Images</label><br>
+                </div>
+                <div class="flex justify-end py-5">
+                    <kin-filter :sortBy="sortBy" @sort="sort" />
                 </div>
                 <div class="hidden font-bold border-b border-gray-300 py-2 md:grid md:grid-cols-6 md:gap-4">
                     <div class="col-span-2" v-show="showImages">Image</div>
@@ -20,13 +23,7 @@
                 </div>
                 <div class="odd:bg-blue-100">
                     <div v-for="singleKin in kin.data" :key="singleKin.id" class="border-b border-gray-300 grid grid-cols-1 md:grid-cols-6 gap-4">
-                        <Link :href="'/kin/' + singleKin.slug" class="md:col-span-2 py-5" v-show="showImages">
-                            <img :src="singleKin.current_image_url" alt="kin image" >
-                        </Link>
-                        <Link :href="'/kin/' + singleKin.slug" class="md:py-5 text-blue-400 hover:text-blue-700">{{ singleKin.name }}</Link>
-                        <Link :href="'/owner/' + singleKin.gaian.slug" class="md:py-5 text-blue-400 hover:text-blue-700" v-if="singleKin.gaian">{{ singleKin.gaian.name }}</Link>
-                        <Link :href="'/colorist/' + singleKin.colourist.slug" class="md:py-5 text-blue-400 hover:text-blue-700" v-if="singleKin.colourist">{{ singleKin.colourist.name }}</Link>
-                        <div class="md:py-5">{{ singleKin.birthdate }}</div>
+                        <kin :showImages="showImages" :kin="singleKin"></kin>
                     </div>
                 </div>
                 <div class="py-5">
@@ -40,6 +37,9 @@
 <script>
     import Paginator from "@/Components/Paginator";
     import Navbar from "@/Components/Nav";
+    import KinFilter from "@/Components/Filter";
+    import Kin from "@/Components/Kin";
+    import birthdate from "../Mixins/birthdate";
 
     export default {
         props: {
@@ -48,11 +48,27 @@
         },
         components: {
             Paginator,
-            Navbar
+            Navbar,
+            KinFilter,
+            Kin
         },
+        mixins: [ birthdate ],
         data: function() {
             return {
                 showImages: true,
+                sortBy: null
+            }
+        },
+        mounted() {
+            console.log(this.kin);
+        },
+        methods: {
+            sort: function(sortType) {
+                this.$inertia.reload({
+                    data: {
+                        sort: sortType
+                    }
+                })
             }
         }
     }

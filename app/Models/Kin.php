@@ -54,4 +54,8 @@ class Kin extends Model
     public function father() {
         return $this->belongsTo(Kin::class, 'father_id');
     }
+
+    public function familiar() {
+        return $this->hasMany(Familiar::class);
+    }
 }
