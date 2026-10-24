@@ -1,17 +1,16 @@
 <template>
-<nav class="flex items-center justify-between flex-wrap bg-matope-green p-6">
-  <div class="flex items-center shrink-0 text-white mr-6">
+<nav class="flex items-center flex-wrap md:justify-between bg-matope-green p-6">
+  <div class="flex flex-wrap lg:flex-no-wrap items-center justify-center md:justify-between text-white mr-6">
     <Link href="/">
-      <img src="https://matope.pixel-blueberry.com/forums/Themes/Fumes/images/logo.png" alt="Matope home of the kimeti">
+      <img src="/images/dakindex.png" alt="Matope home of the kimeti">
+    </Link>
+    <Link href="https://matope-swamp.com/forums/">
+      <img src="/images/dajointheforums.png" alt="Join the forums">
     </Link>
   </div>
-  <div class="w-full block grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-sm lg:grow">
-      <a href="https://matope-swamp.com/forums/" target="_blank" class="inline-block text-base px-4 py-2 leading-none text-white hover:text-amber-200 mt-4 lg:mt-0">Join the Forums</a>
-    </div>
-    <div class="md:w-1/3">
-      <search @input="search"></search>
-    </div>
+
+  <div class="w-full md:w-1/3">
+    <search @input="search"></search>
   </div>
 </nav>
 </template>
