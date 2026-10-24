@@ -34,7 +34,6 @@ class SearchController extends Controller
 
         $owners = QueryBuilder::for(Gaian::class)
             ->allowedIncludes('kin', 'familiar')
-            ->with('kin', 'familiar')
             ->withCount('kin', 'familiar')
             ->allowedFilters('name')
             ->paginate(15, ['*'], 'owner_page', null)

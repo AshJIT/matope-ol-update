@@ -12,7 +12,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .mixin({ methods: { route } })
             .use(plugin)
-            .use(PrimeVue, { theme: { preset: Aura } })
+            .use(PrimeVue, { theme: { preset: Aura, options: { darkModeSelector: '.dark' } } })
             .component('Link', Link)
             .mount(el);
     },

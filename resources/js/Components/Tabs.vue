@@ -19,36 +19,20 @@
             }
         },
 
-        data: function() {
-            return {
-                tabs: null,
-            }
-        },
-
-        mounted() {
-            this.tabs = this.items.map(item => {
-                return {
-                    title: item,
-                    active: false,
-                }
-            });
-
-            this.tabs[0].active = true;
-        },
-        
         computed: {
-            active: function() {
-                return this.tabs.filter(tab => tab.active)[0].title;
+            tabs: function() {
+                return this.items.map(item => {
+                    return {
+                        title: item,
+                        active: item === this.modelValue,
+                    }
+                });
             }
         },
 
         methods: {
             setTab: function(selected) {
-                this.tabs = this.tabs.map(tab => {
-                    return {...tab, active: selected.title === tab.title ? true : false }
-                });
-
-                this.$emit('update:modelValue', this.active);                
+                this.$emit('update:modelValue', selected.title);
             }
         }
     }

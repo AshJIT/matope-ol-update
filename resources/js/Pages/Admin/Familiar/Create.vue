@@ -8,7 +8,7 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                         <jet-form-section @submitted="storeFamiliar">
                             <template #title>
@@ -28,7 +28,7 @@
 
                                 <div class="col-span-6 sm:col-span-4">
                                     <jet-label for="familiar_species_id" value="Species" />
-                                    <dropdown id="familiar_species_id" v-model="form.familiar_species" class="mt-1 block w-full" ref="familiar_species_id" :options="familiar_species.data" @filter="getSpecies($event)" optionLabel="name" placeholder="Select a species" :filter="true" filterPlaceholder="Find Species"/>
+                                    <dropdown id="familiar_species_id" v-model="form.familiar_species" class="mt-1 block w-full" ref="familiar_species_id" :options="familiar_species.data" @filter="searching = 'getSpecies'; searchTerm = $event.value; getSpecies($event)" :loading="searching === 'getSpecies'" :emptyFilterMessage="searching === 'getSpecies' ? 'Searching…' : undefined" optionLabel="name" placeholder="Select a species" :filter="true" filterPlaceholder="Find Species"/>
                                     <jet-input-error :message="form.errors.familiar_species_id" class="mt-2" />
                                 </div>
 
@@ -46,19 +46,19 @@
 
                                 <div class="col-span-6 sm:col-span-4">
                                     <jet-label for="kin_id" value="Kin" />
-                                    <dropdown id="kin_id" v-model="form.kin" class="mt-1 block w-full" ref="kin_id" :options="kin.data" @filter="getKin($event)" optionLabel="name" placeholder="Select a kin" :filter="true" filterPlaceholder="Find Kin"/>
+                                    <dropdown id="kin_id" v-model="form.kin" class="mt-1 block w-full" ref="kin_id" :options="kin.data" @filter="searching = 'getKin'; searchTerm = $event.value; getKin($event)" :loading="searching === 'getKin'" :emptyFilterMessage="searching === 'getKin' ? 'Searching…' : undefined" optionLabel="name" placeholder="Select a kin" :filter="true" filterPlaceholder="Find Kin"/>
                                     <jet-input-error :message="form.errors.kin_id" class="mt-2" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-4" v-show="!form.kin">
                                     <jet-label for="owner_id" value="Owner" />
-                                    <dropdown id="owner_id" v-model="form.owner" class="mt-1 block w-full" ref="owner_id" :options="owners.data" @filter="getOwners($event)" optionLabel="name" placeholder="Select an owner" :filter="true" filterPlaceholder="Find Owner"/>
+                                    <dropdown id="owner_id" v-model="form.owner" class="mt-1 block w-full" ref="owner_id" :options="owners.data" @filter="searching = 'getOwners'; searchTerm = $event.value; getOwners($event)" :loading="searching === 'getOwners'" :emptyFilterMessage="searching === 'getOwners' ? 'Searching…' : undefined" optionLabel="name" placeholder="Select an owner" :filter="true" filterPlaceholder="Find Owner"/>
                                     <jet-input-error :message="form.errors.owner_id" class="mt-2" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-4">
                                     <jet-label for="colourist_id" value="Colorist" />
-                                    <dropdown id="colourist_id" v-model="form.colorist" class="mt-1 block w-full" ref="colourist_id" :options="colorist.data" @filter="getColorists($event)" optionLabel="name" placeholder="Select a colorist" :filter="true" filterPlaceholder="Find Colorist"/>
+                                    <dropdown id="colourist_id" v-model="form.colorist" class="mt-1 block w-full" ref="colourist_id" :options="colorist.data" @filter="searching = 'getColorists'; searchTerm = $event.value; getColorists($event)" :loading="searching === 'getColorists'" :emptyFilterMessage="searching === 'getColorists' ? 'Searching…' : undefined" optionLabel="name" placeholder="Select a colorist" :filter="true" filterPlaceholder="Find Colorist"/>
                                     <jet-input-error :message="form.errors.colourist_id" class="mt-2" />
                                 </div>
                             </template>
@@ -115,6 +115,8 @@ export default {
 
     data: function() {
         return {
+            searching: null,
+            searchTerm: null,
             form: useForm({
                 name: '',
                 familiar_species: '',
@@ -168,37 +170,45 @@ export default {
             })
         },
 
-        getOwners: _.throttle(function(event) {
+        getOwners: _.debounce(function(event) {
             this.$inertia.reload({
+                onFinish: () => { if (event.value === this.searchTerm) this.searching = null },
+                only: ['owners'],
                 data: {
                     owner: event.value
                 }
             })
-        }, 300),
+        }, 600),
 
-        getKin: _.throttle(function(event) {
+        getKin: _.debounce(function(event) {
             this.$inertia.reload({
+                onFinish: () => { if (event.value === this.searchTerm) this.searching = null },
+                only: ['kin'],
                 data: {
                     kin: event.value
                 }
             })
-        }, 300),
+        }, 600),
 
-        getColorists: _.throttle(function(event) {
+        getColorists: _.debounce(function(event) {
             this.$inertia.reload({
+                onFinish: () => { if (event.value === this.searchTerm) this.searching = null },
+                only: ['colorist'],
                 data: {
                     colorist: event.value
                 }
             })
-        }, 300),
+        }, 600),
 
-        getSpecies: _.throttle(function(event) {
+        getSpecies: _.debounce(function(event) {
             this.$inertia.reload({
+                onFinish: () => { if (event.value === this.searchTerm) this.searching = null },
+                only: ['familiar_species'],
                 data: {
                     familiar_species: event.value
                 }
             })
-        }, 300)
+        }, 600)
     },
 }
 </script>

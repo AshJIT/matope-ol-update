@@ -8,7 +8,7 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                         <jet-form-section @submitted="updatePassword">
                             <template #title>
@@ -52,19 +52,19 @@
 
                                 <div class="col-span-6 sm:col-span-4">
                                     <jet-label for="mother" value="Mother" />
-                                    <dropdown v-model="form.mother" class="mt-1 block w-full" :options="mothers.data" @filter="getMoms($event)" optionLabel="name" placeholder="Select a mother" :filter="true" filterPlaceholder="Find Mother"/>
+                                    <dropdown v-model="form.mother" class="mt-1 block w-full" :options="mothers.data" @filter="searching = 'getMoms'; searchTerm = $event.value; getMoms($event)" :loading="searching === 'getMoms'" :emptyFilterMessage="searching === 'getMoms' ? 'Searching…' : undefined" optionLabel="name" placeholder="Select a mother" :filter="true" filterPlaceholder="Find Mother"/>
                                     <jet-input-error :message="form.errors.mother" class="mt-2" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-4">
                                     <jet-label for="father" value="Father" />
-                                    <dropdown v-model="form.father" class="mt-1 block w-full" :options="fathers.data" @filter="getDads($event)" optionLabel="name" placeholder="Select a father" :filter="true" filterPlaceholder="Find Father"/>
+                                    <dropdown v-model="form.father" class="mt-1 block w-full" :options="fathers.data" @filter="searching = 'getDads'; searchTerm = $event.value; getDads($event)" :loading="searching === 'getDads'" :emptyFilterMessage="searching === 'getDads' ? 'Searching…' : undefined" optionLabel="name" placeholder="Select a father" :filter="true" filterPlaceholder="Find Father"/>
                                     <jet-input-error :message="form.errors.father" class="mt-2" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-4">
                                     <jet-label for="owner" value="Owner" />
-                                    <dropdown v-model="form.owner" class="mt-1 block w-full" ref="owner" :options="owners.data" @filter="getOwners($event)" optionLabel="name" placeholder="Select an owner" :filter="true" filterPlaceholder="Find Owner"/>
+                                    <dropdown v-model="form.owner" class="mt-1 block w-full" ref="owner" :options="owners.data" @filter="searching = 'getOwners'; searchTerm = $event.value; getOwners($event)" :loading="searching === 'getOwners'" :emptyFilterMessage="searching === 'getOwners' ? 'Searching…' : undefined" optionLabel="name" placeholder="Select an owner" :filter="true" filterPlaceholder="Find Owner"/>
                                     <jet-input-error :message="form.errors.owner" class="mt-2" />
                                 </div>
 
@@ -127,6 +127,8 @@ export default {
     },
     data: function() {
         return {
+            searching: null,
+            searchTerm: null,
             form: useForm({
                 name: '',
                 gender: '',
@@ -207,30 +209,36 @@ export default {
             })
         },
 
-        getMoms: _.throttle(function(event) {
+        getMoms: _.debounce(function(event) {
             this.$inertia.reload({
+                onFinish: () => { if (event.value === this.searchTerm) this.searching = null },
+                only: ['mothers'],
                 data: {
                     mom: event.value
                 }
             });
 
-        }, 300),
+        }, 600),
 
-        getDads: _.throttle(function(event) {
+        getDads: _.debounce(function(event) {
             this.$inertia.reload({
+                onFinish: () => { if (event.value === this.searchTerm) this.searching = null },
+                only: ['fathers'],
                 data: {
                     dad: event.value
                 }
             })
-        }, 300),
+        }, 600),
 
-        getOwners: _.throttle(function(event) {
+        getOwners: _.debounce(function(event) {
             this.$inertia.reload({
+                onFinish: () => { if (event.value === this.searchTerm) this.searching = null },
+                only: ['owners'],
                 data: {
                     owner: event.value
                 }
             })
-        }, 300)
+        }, 600)
     },
 }
 </script>

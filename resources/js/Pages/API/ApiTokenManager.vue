@@ -26,7 +26,7 @@
                         <div v-for="permission in availablePermissions" :key="permission">
                             <label class="flex items-center">
                                 <jet-checkbox :value="permission" v-model:checked="createApiTokenForm.permissions"/>
-                                <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
+                                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ permission }}</span>
                             </label>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                     Please copy your new API token. For your security, it won't be shown again.
                 </div>
 
-                <div class="mt-4 bg-gray-100 px-4 py-2 rounded-sm font-mono text-sm text-gray-500" v-if="$page.props.jetstream.flash.token">
+                <div class="mt-4 bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded-sm font-mono text-sm text-gray-500 dark:text-gray-400" v-if="$page.props.jetstream.flash.token">
                     {{ $page.props.jetstream.flash.token }}
                 </div>
             </template>
@@ -123,7 +123,7 @@
                     <div v-for="permission in availablePermissions" :key="permission">
                         <label class="flex items-center">
                             <jet-checkbox :value="permission" v-model:checked="updateApiTokenForm.permissions"/>
-                            <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
+                            <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ permission }}</span>
                         </label>
                     </div>
                 </div>
