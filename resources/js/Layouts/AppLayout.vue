@@ -26,6 +26,12 @@
                                 <jet-nav-link :href="route('admin.familiar.create')" :active="route().current('admin.familiar.create')">
                                     Add Familiar
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('admin.species.create')" :active="route().current('admin.species.create')">
+                                    Add Species
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('admin.owner.create')" :active="route().current('admin.owner.create')">
+                                    Add Owner
+                                </jet-nav-link>
                             </div>
                         </div>
 

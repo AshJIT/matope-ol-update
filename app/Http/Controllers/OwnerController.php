@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -43,5 +46,31 @@ class OwnerController extends Controller
             'owner' => $owner,
             'familiars' => $familiars
         ]);
+    }
+
+    public function create()
+    {
+        return inertia('Admin/Owner/Create');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $data['slug'] = SlugService::createSlug(Gaian::class, 'slug', $data['name'], ['unique' => false]);
+
+        if (Gaian::where('slug', $data['slug'])->exists()) {
+            throw ValidationException::withMessages(['name' => "An owner with the slug \"{$data['slug']}\" already exists."]);
+        }
+
+        Gaian::create($data + [
+            'is_colourist' => 0,
+            'kin_count' => null,
+            'coloured_kin_count' => null,
+        ]);
+
+        return Redirect::route('admin.owner.create')->with('flash.banner', 'Owner created successfully!');
     }
 }
