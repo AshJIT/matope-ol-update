@@ -11,7 +11,7 @@
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link href="/">
-                                   <img src="https://matope.pixel-blueberry.com/forums/Themes/Fumes/images/logo.png" alt="Matope home of the kimeti">
+                                   <img src="/images/site_logo.png" alt="Matope home of the kimeti">
                                 </Link>
                             </div>
 

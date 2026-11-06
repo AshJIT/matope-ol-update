@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Http\Requests\StoreKin;
+use App\Http\Requests\StoreKinBreeding;
+use Illuminate\Support\Facades\DB;
 use App\Models\Kin;
 use App\Models\Gender;
 use App\Models\KinSpecies;
@@ -68,6 +70,22 @@ class KinController extends Controller
         Kin::create($request->validated());
 
         return Redirect::route('admin.kin.create')->with('flash.banner', 'Kin created successfully!');
+    }
+
+    public function storeBreeding(StoreKinBreeding $request)
+    {
+        $data = $request->validated();
+        $shared = collect($data)->only(['mother_id', 'father_id', 'colourist_id'])->all();
+
+        DB::transaction(function () use ($data, $shared) {
+            foreach ($data['entries'] as $entry) {
+                Kin::create($entry + $shared + ['slug' => Kin::makeSlug($entry['name'])]);
+            }
+        });
+
+        $count = count($data['entries']);
+
+        return Redirect::route('admin.kin.create')->with('flash.banner', "{$count} kin created successfully!");
     }
 
     public function update(StoreKin $request, Kin $kin)

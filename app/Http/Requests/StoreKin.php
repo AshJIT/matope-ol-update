@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use App\Traits\ChecksValidation;
 use Carbon\Carbon;
 use App\Models\Kin;
@@ -42,7 +41,7 @@ class StoreKin extends FormRequest
     {
         $this->merge([
             'name' => $this->name ? trim($this->name) : null,
-            'slug' => trim($this->name) === "Totoma" ? 'totoma-' . (Kin::where('species_id', 2)->count() + 1) : Str::slug($this->name, '-'),
+            'slug' => Kin::makeSlug($this->name),
             'mother_id' => $this->mother ? $this->mother['id'] : null,
             'father_id' => $this->father ? $this->father['id'] : null,
             'birthdate' => $this->birthdate ? Carbon::parse($this->birthdate)->format('Y-m-d') : null,

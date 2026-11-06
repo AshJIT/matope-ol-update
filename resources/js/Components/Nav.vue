@@ -2,7 +2,7 @@
 <nav class="flex items-center flex-wrap md:justify-between bg-matope-green p-6">
   <div class="flex flex-wrap lg:flex-no-wrap items-center justify-center md:justify-between text-white mr-6">
     <Link href="/">
-      <img src="/images/dakindex.png" alt="Matope home of the kimeti">
+        <img src="/images/site_logo.png" alt="Matope home of the kimeti">
     </Link>
     <Link href="https://matope-swamp.com/forums/">
       <img src="/images/dajointheforums.png" alt="Join the forums">

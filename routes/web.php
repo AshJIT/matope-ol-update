@@ -40,6 +40,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     Route::get('admin/kin/list', 'App\Http\Controllers\KinController@list')->name('admin.kin.list');
     Route::post('admin/kin/store', 'App\Http\Controllers\KinController@store')->name('admin.kin.store');
+    Route::post('admin/kin/store-breeding', 'App\Http\Controllers\KinController@storeBreeding')->name('admin.kin.store-breeding');
     Route::put('admin/kin/update/{kin}', 'App\Http\Controllers\KinController@update')->name('admin.kin.update');
 
     Route::post('admin/familiar/store', 'App\Http\Controllers\FamiliarController@store')->name('admin.familiar.store');

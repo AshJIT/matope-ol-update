@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Kin extends Model
 {
@@ -30,6 +31,15 @@ class Kin extends Model
         'gender_id',
         'children_count'
     ];
+
+    public static function makeSlug(?string $name): string
+    {
+        $name = trim($name ?? '');
+
+        return $name === 'Totoma'
+            ? 'totoma-' . (static::where('species_id', 2)->count() + 1)
+            : Str::slug($name, '-');
+    }
 
     public function gaian() {
         return $this->belongsTo(Gaian::class, 'owner_id');
